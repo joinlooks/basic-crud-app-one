@@ -1,0 +1,10 @@
+opencollection: 1.0.0
+
+info:
+  name: Basic CRUD app - spring boot learning
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git
