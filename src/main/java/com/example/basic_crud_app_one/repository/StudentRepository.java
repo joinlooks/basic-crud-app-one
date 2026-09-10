@@ -1,19 +1,9 @@
 package com.example.basic_crud_app_one.repository;
 
 import com.example.basic_crud_app_one.entity.Student;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public class StudentRepository {
-    public Student saveStudentToDB(Student studentRequest) {
-        System.out.println("Entering Repository");
-        System.out.println("Exiting Repository");
+import org.springframework.data.jpa.repository.JpaRepository;
 
-        Student toReturn = new Student();
-        toReturn.setName("Lakshya");
-        toReturn.setAge(24);
-        toReturn.setEmail("lakshya@google.com");
+public interface StudentRepository extends JpaRepository<Student, Long> {
 
-        return toReturn;
-    }
 }
