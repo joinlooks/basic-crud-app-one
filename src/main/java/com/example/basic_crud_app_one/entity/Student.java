@@ -16,6 +16,7 @@ public class Student {
     private int age;
     private int rollNo;
     private String subject;
+    private boolean deleted;
 
     @Override
     public String toString() {
@@ -69,6 +70,14 @@ public class Student {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     @Override
