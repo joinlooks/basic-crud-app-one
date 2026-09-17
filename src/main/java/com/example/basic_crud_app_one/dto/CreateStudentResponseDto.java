@@ -1,27 +1,27 @@
-package com.example.basic_crud_app_one.entity;
+package com.example.basic_crud_app_one.dto;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-@Entity
-public class Student {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CreateStudentResponseDto {
     private Long id;
-
     private String name;
     private String email;
     private int age;
     private int rollNo;
     private String subject;
-    private boolean deleted;
+    private String message;
 
+    // To let the client know that when their object was created and updated
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -63,20 +63,12 @@ public class Student {
         this.subject = subject;
     }
 
-    public Long getId() {
-        return id;
+    public String getMessage() {
+        return message;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public LocalDateTime getCreatedAt() {
