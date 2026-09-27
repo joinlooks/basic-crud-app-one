@@ -10,6 +10,7 @@ import com.example.basic_crud_app_one.dto.CreateStudentResponseDto;
 import com.example.basic_crud_app_one.dto.UpdateStudentRequestDto;
 import com.example.basic_crud_app_one.dto.UpdateStudentResponseDto;
 import com.example.basic_crud_app_one.entity.Student;
+import com.example.basic_crud_app_one.exception.ResourceNotFoundException;
 import com.example.basic_crud_app_one.repository.StudentRepository;
 
 @Service
@@ -28,16 +29,28 @@ public class StudentService {
         return mapToCreateDto(studentResponse);
     }
 
-    // With softDelete included in functionality,
-    // we need to change the query to fetch a record.
-    // Now the query will be like:
-    // select * from student where id = 1 and deleted = false
+    /*
+     * With softDelete included in functionality,
+     * we need to change the query to fetch a record.
+     * Now the query will be like:
+     * select * from student where id = 1 and deleted = false
+     */
     public CreateStudentResponseDto getStudent(Long id) {
-        Optional<Student> studentResponse = studentRepository.findByIdAndDeletedIsFalse(id);
-        if (studentResponse.isPresent()) {
-            return mapToCreateDto(studentResponse.get());
-        }
-        return null;
+
+        Student studentResponse = studentRepository
+                .findByIdAndDeletedIsFalse(id)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Student with ID: " + id + ", does not exist."));
+
+        return mapToCreateDto(studentResponse);
+
+        // Optional<Student> studentResponse =
+        // studentRepository.findByIdAndDeletedIsFalse(id);
+        // // if (studentResponse.isPresent()) {
+        // // return mapToCreateDto(studentResponse.get());
+        // // }
+        // // return null;
+        // return mapToCreateDto(studentResponse.get());
     }
 
     // NEED TO UPDATE

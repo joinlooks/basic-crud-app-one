@@ -30,6 +30,11 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+    /*
+     * To create a student, requests will come on this mapping.
+     * Expects a request VALID request body and if entry is created successfully in
+     * the database, returns a successfull 201 response
+     */
     @PostMapping
     public ResponseEntity<CreateStudentResponseDto> createStudent(
             @Valid @RequestBody CreateStudentRequestDto studentRequestDto) {
@@ -40,13 +45,12 @@ public class StudentController {
                 .body(createdStudent);
     }
 
+    /*
+     * To get a single student record from database.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<CreateStudentResponseDto> getStudent(@PathVariable Long id) {
         CreateStudentResponseDto fetchedStudent = studentService.getStudent(id);
-
-        if (fetchedStudent == null) {
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(fetchedStudent);
     }
 
